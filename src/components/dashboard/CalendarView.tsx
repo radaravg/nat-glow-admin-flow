@@ -59,104 +59,104 @@ export const CalendarView = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="h-full flex flex-col">
       {/* Header with Export Options */}
-      <Card className="glass-card p-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
+      <div className="px-4 py-3 border-b border-border/50">
+        <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary/20 rounded-2xl flex items-center justify-center">
               <Calendar className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-foreground">Attendance Reports</h2>
-              <p className="text-sm text-muted-foreground">Track employee check-ins and tasks</p>
+              <h2 className="text-lg font-semibold text-foreground">Attendance</h2>
+              <p className="text-xs text-muted-foreground">Check-ins & tasks</p>
             </div>
           </div>
+        </div>
 
-          <div className="flex items-center space-x-3">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="hover-glow"
-            >
-              <Filter className="w-4 h-4 mr-2" />
-              Filter
-            </Button>
-            
+        <div className="flex items-center justify-between">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="hover-glow rounded-xl"
+          >
+            <Filter className="w-4 h-4 mr-1" />
+            Filter
+          </Button>
+          
+          <div className="flex items-center space-x-2">
             <Button 
               onClick={() => handleExport('pdf')}
               variant="outline" 
               size="sm"
-              className="hover-glow"
+              className="hover-glow rounded-xl"
             >
-              <Download className="w-4 h-4 mr-2" />
-              PDF
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline ml-1">PDF</span>
             </Button>
             
             <Button 
               onClick={() => handleExport('excel')}
-              className="btn-premium"
+              className="btn-premium rounded-xl"
               size="sm"
             >
-              <Download className="w-4 h-4 mr-2" />
-              Excel
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline ml-1">Excel</span>
             </Button>
           </div>
         </div>
-      </Card>
+      </div>
 
       {/* View Tabs */}
-      <Tabs value={activeView} onValueChange={setActiveView}>
-        <TabsList className="bg-secondary/50 p-1 rounded-xl">
-          <TabsTrigger 
-            value="daily"
-            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-          >
-            Daily
-          </TabsTrigger>
-          <TabsTrigger 
-            value="weekly"
-            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-          >
-            Weekly
-          </TabsTrigger>
-          <TabsTrigger 
-            value="monthly"
-            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-          >
-            Monthly
-          </TabsTrigger>
-        </TabsList>
+      <div className="px-4 py-2">
+        <Tabs value={activeView} onValueChange={setActiveView} className="flex-1 flex flex-col">
+          <TabsList className="bg-secondary/50 p-1 rounded-2xl">
+            <TabsTrigger 
+              value="daily"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-xl"
+            >
+              Daily
+            </TabsTrigger>
+            <TabsTrigger 
+              value="weekly"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-xl"
+            >
+              Weekly
+            </TabsTrigger>
+            <TabsTrigger 
+              value="monthly"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-xl"
+            >
+              Monthly
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="daily" className="space-y-4">
-          <Card className="glass-card p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Today's Attendance</h3>
-            
-            <div className="space-y-4">
+          <TabsContent value="daily" className="flex-1 m-0 pt-4 overflow-auto">
+            <div className="space-y-3">
               {mockAttendance.map((record) => (
-                <div
+                <Card
                   key={record.id}
-                  className="flex flex-col lg:flex-row lg:items-center justify-between p-4 bg-secondary/30 rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 space-y-3 lg:space-y-0"
+                  className="glass-card p-4 hover-glow"
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-2">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
                       <h4 className="font-medium text-foreground">{record.employeeName}</h4>
                       <Badge 
                         variant={record.status === 'completed' ? 'default' : 'secondary'}
-                        className={record.status === 'completed' ? 'bg-success/20 text-success border-success/30' : 'bg-warning/20 text-warning border-warning/30'}
+                        className={`text-xs ${record.status === 'completed' ? 'bg-success/20 text-success border-success/30' : 'bg-warning/20 text-warning border-warning/30'}`}
                       >
                         {record.status === 'completed' ? (
                           <CheckCircle className="w-3 h-3 mr-1" />
                         ) : (
                           <Clock className="w-3 h-3 mr-1" />
                         )}
-                        {record.status === 'completed' ? 'Completed' : 'In Progress'}
+                        {record.status === 'completed' ? 'Done' : 'Active'}
                       </Badge>
                     </div>
                     
-                    <p className="text-sm text-muted-foreground mb-2">{record.task}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{record.task}</p>
                     
-                    <div className="flex items-center space-x-4 text-xs text-muted-foreground">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span className="flex items-center space-x-1">
                         <Clock className="w-3 h-3" />
                         <span>In: {record.checkIn}</span>
@@ -167,26 +167,26 @@ export const CalendarView = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </Card>
               ))}
             </div>
-          </Card>
-        </TabsContent>
+          </TabsContent>
 
-        <TabsContent value="weekly" className="space-y-4">
-          <Card className="glass-card p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Weekly Summary</h3>
-            <p className="text-muted-foreground">Weekly attendance reports will be displayed here.</p>
-          </Card>
-        </TabsContent>
+          <TabsContent value="weekly" className="flex-1 m-0 pt-4 overflow-auto">
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Weekly Summary</h3>
+              <p className="text-muted-foreground">Weekly attendance reports will be displayed here.</p>
+            </Card>
+          </TabsContent>
 
-        <TabsContent value="monthly" className="space-y-4">
-          <Card className="glass-card p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Monthly Overview</h3>
-            <p className="text-muted-foreground">Monthly attendance analytics will be displayed here.</p>
-          </Card>
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="monthly" className="flex-1 m-0 pt-4 overflow-auto">
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Monthly Overview</h3>
+              <p className="text-muted-foreground">Monthly attendance analytics will be displayed here.</p>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };

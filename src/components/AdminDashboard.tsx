@@ -23,56 +23,58 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header onLogout={onLogout} />
       
-      <div className="container mx-auto p-6 animate-fade-in">
-        <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-secondary/50 p-1 rounded-xl">
-            <TabsTrigger 
-              value="dashboard" 
-              className="flex items-center space-x-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-lg"
-            >
-              <Users className="w-4 h-4" />
-              <span className="hidden sm:inline">Dashboard</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="calendar"
-              className="flex items-center space-x-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-lg"
-            >
-              <Calendar className="w-4 h-4" />
-              <span className="hidden sm:inline">Calendar</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="requests"
-              className="flex items-center space-x-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-lg"
-            >
-              <RotateCcw className="w-4 h-4" />
-              <span className="hidden sm:inline">Requests</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="notes"
-              className="flex items-center space-x-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-lg"
-            >
-              <FileText className="w-4 h-4" />
-              <span className="hidden sm:inline">Notes</span>
-            </TabsTrigger>
-          </TabsList>
+      <div className="flex-1 animate-fade-in">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="h-full flex flex-col">
+          <div className="px-4 py-3 border-b border-border/50">
+            <TabsList className="grid w-full grid-cols-4 bg-secondary/50 p-1 rounded-2xl h-12">
+              <TabsTrigger 
+                value="dashboard" 
+                className="flex flex-col items-center justify-center gap-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-xl h-10"
+              >
+                <Users className="w-5 h-5" />
+                <span className="text-xs">Dashboard</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="calendar"
+                className="flex flex-col items-center justify-center gap-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-xl h-10"
+              >
+                <Calendar className="w-5 h-5" />
+                <span className="text-xs">Calendar</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="requests"
+                className="flex flex-col items-center justify-center gap-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-xl h-10"
+              >
+                <RotateCcw className="w-5 h-5" />
+                <span className="text-xs">Requests</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="notes"
+                className="flex flex-col items-center justify-center gap-1 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 rounded-xl h-10"
+              >
+                <FileText className="w-5 h-5" />
+                <span className="text-xs">Notes</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <div className="animate-slide-up">
-            <TabsContent value="dashboard" className="space-y-6">
+          <div className="flex-1 animate-slide-up overflow-auto">
+            <TabsContent value="dashboard" className="h-full m-0 p-0">
               <EmployeeDashboard />
             </TabsContent>
 
-            <TabsContent value="calendar" className="space-y-6">
+            <TabsContent value="calendar" className="h-full m-0 p-0">
               <CalendarView />
             </TabsContent>
 
-            <TabsContent value="requests" className="space-y-6">
+            <TabsContent value="requests" className="h-full m-0 p-0">
               <ResetRequests />
             </TabsContent>
 
-            <TabsContent value="notes" className="space-y-6">
+            <TabsContent value="notes" className="h-full m-0 p-0">
               <NotesSection />
             </TabsContent>
           </div>

@@ -15,23 +15,23 @@ export const Header = ({ onLogout }: HeaderProps) => {
   };
 
   return (
-    <header className="glass-card border-b border-border/50 p-4">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
+    <header className="glass-card border-b border-border/50 px-4 py-3 shrink-0">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
             <span className="text-lg font-bold text-primary-foreground">N</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-foreground">NAT Admin</h1>
-            <p className="text-sm text-muted-foreground">Employee Management System</p>
+            <h1 className="text-lg font-bold text-foreground">NAT Admin</h1>
+            <p className="text-xs text-muted-foreground">Employee Management</p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2">
           <Button
             variant="ghost"
             size="sm"
-            className="hover-glow text-muted-foreground hover:text-foreground"
+            className="hover-glow text-muted-foreground hover:text-foreground w-9 h-9 p-0 rounded-xl"
           >
             <Settings className="w-4 h-4" />
           </Button>
@@ -40,10 +40,9 @@ export const Header = ({ onLogout }: HeaderProps) => {
             onClick={handleLogout}
             variant="ghost"
             size="sm"
-            className="hover-glow text-muted-foreground hover:text-destructive"
+            className="hover-glow text-muted-foreground hover:text-destructive w-9 h-9 p-0 rounded-xl"
           >
             <LogOut className="w-4 h-4" />
-            <span className="hidden sm:inline ml-2">Logout</span>
           </Button>
         </div>
       </div>

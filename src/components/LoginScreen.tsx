@@ -46,43 +46,44 @@ export const LoginScreen = ({ onLogin }: LoginScreenProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-background/90 to-muted/30">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/90 to-muted/30 px-6 py-8">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(217_91%_60%_/_0.1),_transparent_50%)]" />
       
-      <Card className="glass-card p-8 w-full max-w-md animate-slide-up">
-        <div className="text-center space-y-6">
-          <div className="space-y-2">
-            <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
-              <span className="text-2xl font-bold text-primary-foreground">N</span>
-            </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-              NAT Admin
-            </h1>
-            <p className="text-muted-foreground">
-              Premium Employee Management System
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
-                Admin Password
-              </label>
-              <Input
-                type="password"
-                placeholder="Enter admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="bg-secondary/50 border-border/50 focus:border-primary/50 transition-all duration-300"
-              />
+      <div className="flex flex-col h-full justify-center">
+        <Card className="glass-card p-6 w-full animate-slide-up">
+          <div className="text-center space-y-8">
+            <div className="space-y-3">
+              <div className="w-20 h-20 mx-auto bg-gradient-primary rounded-3xl flex items-center justify-center shadow-glow">
+                <span className="text-3xl font-bold text-primary-foreground">N</span>
+              </div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                NAT Admin
+              </h1>
+              <p className="text-muted-foreground text-lg">
+                Employee Management
+              </p>
             </div>
 
-            <Button 
-              onClick={handleLogin}
-              disabled={isLoading || !password}
-              className="btn-premium w-full h-12 text-white font-medium ripple"
-            >
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <label className="text-base font-medium text-foreground block text-left">
+                  Admin Password
+                </label>
+                <Input
+                  type="password"
+                  placeholder="Enter admin password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="bg-secondary/50 border-border/50 focus:border-primary/50 transition-all duration-300 h-14 text-lg rounded-2xl"
+                />
+              </div>
+
+              <Button 
+                onClick={handleLogin}
+                disabled={isLoading || !password}
+                className="btn-premium w-full h-14 text-white font-medium ripple text-lg rounded-2xl"
+              >
               {isLoading ? (
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -92,13 +93,14 @@ export const LoginScreen = ({ onLogin }: LoginScreenProps) => {
                 'Access Admin Panel'
               )}
             </Button>
-          </div>
+            </div>
 
-          <div className="text-xs text-muted-foreground">
-            Default password: 4004
+            <div className="text-sm text-muted-foreground mt-8">
+              Default password: 4004
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 };
